@@ -1,0 +1,7 @@
+div.login {
+    margin-top: 250px;   /*高度控制*/
+}
+body{
+    background: #ebf1f9; /*背景色*/
+    /*background-image: url("/static/img/beijing.jpg");*/
+}

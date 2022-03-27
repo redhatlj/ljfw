@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表信息</title>
+    {{ assets_css "/static/components/bootstrap-4.6.1/css/bootstrap.min.css" }}
+    {{ assets_css "/static/css/layout.css" }}
+</head>
+
+<body style="padding-top: 60px">
+    <div class="container-fluid">
+<!--        <a href="{{ urlfor `AuthController.Logout` }}">退出登录</a>-->
+
+        {{ template "base/templates/nav.html" . }}
+
+        <div class="container-fluid m-2">
+            <div class="row">
+                <div class="col-1">
+                    <a href="" class="btn  btn-primary">新建</a>
+                </div>
+                <div class="col-11">
+
+                    <form class="form-inline mb-2 float-right" method="get" action="{{ urlfor `UserContriller.Query` }}">
+                        <div class="form-group mr-2 ">
+                            <label class="sr-only">查询:</label>
+                            <input class="form-control"  placeholder="请输入查询字符串" name="q" value="{{ .q }}"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-secondary  btn-sm" value="查询">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+                <table class="table table-sm table-striped table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>员工编号</th>
+                        <th>用户名</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>部门</th>
+                        <th>联系方式</th>
+                        <th>邮箱</th>
+                        <th>联系地址</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>修改时间</th>
+    <!--                    <th>账号密码</th>-->
+
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{ range .users }}
+                    <tr>
+                        <td>{{ .StaffID }}</td>
+                        <td>{{ .Name }}</td>
+                        <td>{{ .Nickname }} </td>
+                        <td>{{ .GenderText }}</td>
+                        <td>{{ .Department }}</td>
+                        <td>{{ .Tel }}</td>
+                        <td>{{ .Email }}</td>
+                        <td>{{ .Addr }}</td>
+                        <td>{{ .StatusText }}</td>
+                        <td>{{ .TimeUPText }}</td>
+                        <td>{{ .TimeUPText }}</td>
+    <!--                    <td>{{ .Password }}</td>-->
+
+                        <td>
+                            <a href="{{ urlfor `UserController.Modify` }}?id={{ .ID }}"  class="btn btn-sm btn-primary">编辑</a>
+<!--                            ID 不等于当前登录用户ID时，显示其他的删除-->
+                            {{ if ne $.LoginUser.ID .ID }}
+                            <a href="{{ urlfor `UserController.DeleteDBUser` }}?id={{ .ID }}"  class="btn btn-sm btn-danger">删除</a>
+                            {{ end }}
+                        </td>
+                    </tr>
+                    {{ end }}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户密码修改</title>
+    {{ assets_css "/static/components/bootstrap-4.6.1/css/bootstrap.min.css" }}
+    {{ assets_css "/static/css/layout.css" }}
+</head>
+
+<body style="margin-top: 90px">
+{{ template "base/templates/nav.html" . }}
+
+<div class="container">
+    <div  class="row">
+        <div class="offset-4 col-5">
+            <div class="login shadow  p-3 mb-5 bg-body rounded" >
+                <form   action="{{ urlfor `PasswordController.Modify` }}" method="POST"  >
+                    <h1 class="text-center">密码修改</h1>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-3">旧密码：</label>
+                        <div class="col-9">
+                            <input class="form-control" type="password" name="old_password" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-3">新密码：</label>
+                        <div class="col-9">
+                            <input class="form-control" type="password" name="new_password1" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-3">确认密码：</label>
+                        <div class="col-9">
+                            <input class="form-control" type="password" name="new_password2" value="">
+                        </div>
+                    </div>
+
+                    {{ if .errors.HasErrors }}
+                    <div class="form-group row">
+                        {{ range .errors.Errors }}
+                        <div class="text-danger text-center col-6 offset-3" >{{ index . 0 }}</div  >
+                        {{ end }}
+                    </div>
+                    <br>
+                    {{ end }}
+
+                    {{ if ne .text "" }}
+                    <div class="alert alert-primary text-center" role="alert" >{{ .text }}</div>
+                    {{ end }}
+
+                    <div class=" d-grid gap-2 col-12 mx-auto">
+                        <input class="btn btn-primary btn-block" type="submit" value="修改">
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+
+</body>
+</html>

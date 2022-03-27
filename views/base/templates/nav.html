@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">{{ config "String" "appname" "CMDB"}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {{ if eq .nav `home` }} active {{ end }} ">
+                <a class="nav-link" href="{{ urlfor `HomeController.Index` }}  " >首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item {{ if eq .nav `user` }} active {{ end }} " >
+                <a class="nav-link  " href="{{ urlfor `UserController.Query` }}">用户管理</a>
+            </li>
+        </ul>
+
+        <span class="navbar-text" >
+                    欢迎{{ .LoginUser.Nickname }}
+            <!--                    <a class="btn btn-sm bg-dark" href="{{ urlfor `AuthController.Logout` }}">退出登录</a>-->
+                </span>
+
+        <form class="form-inline my-2 my-lg-0">
+            <!--                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+            <a class="btn btn-link my-2 my-sm-0" href="{{ urlfor `AuthController.Logout` }}" type="submit">退出登录</a>
+        </form>
+    </div>
+</nav>
